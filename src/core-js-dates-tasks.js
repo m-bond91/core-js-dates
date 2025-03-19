@@ -1,4 +1,3 @@
-/* eslint-disable no-constant-condition */
 /** ********************************************************************************************
  *                                                                                             *
  * Please read the following tutorial before implementing tasks:                               *
@@ -241,17 +240,18 @@ function getNextFridayThe13th(date) {
   let year = date.getFullYear();
   let month = date.getMonth();
 
-  while (true) {
-    const candidateDate = new Date(year, month, 13);
-    if (candidateDate.getDay() === 5 && candidateDate > date) {
-      return candidateDate;
-    }
+  let candidateDate = new Date(year, month, 13);
+
+  while (candidateDate <= date || candidateDate.getDay() !== 5) {
     month += 1;
     if (month > 11) {
       month = 0;
       year += 1;
     }
+    candidateDate = new Date(year, month, 13);
   }
+
+  return candidateDate;
 }
 getNextFridayThe13th(new Date(2024, 0, 13));
 
